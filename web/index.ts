@@ -11,6 +11,7 @@ interface ImagePreviewProps {
 }
 
 const ImagePreview = ({ src, onclick, onload, onerror, loading }: ImagePreviewProps) => {
+console.log("🚀 ~ file: index.ts ~ line 14 ~ ImagePreview ~ src", src)
     const style = {
         filter: loading ? 'blur(5px)' : '',
         opacity: loading ? 0.1 : 1,

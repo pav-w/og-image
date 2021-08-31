@@ -3,44 +3,19 @@ import { readFileSync } from 'fs';
 import { sanitizeHtml } from './sanitizer';
 import { ParsedRequest } from './types';
 
-const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
-const bold = readFileSync(`${__dirname}/../_fonts/Heebo-Bold.ttf`).toString('base64');
-const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
+const heebo = readFileSync(`${__dirname}/../_fonts/Heebo-Bold.ttf`).toString('base64');
 
 function getCss() {
-    let background = 'white';
-
-    return `
-    @font-face {
-        font-family: 'Inter';
-        font-style:  normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
-    }
-
-    @font-face {
-        font-family: 'Inter';
-        font-style:  normal;
-        font-weight: bold;
-        src: url(data:font/woff2;charset=utf-8;base64,${bold}) format('woff2');
-    }
-
-    @font-face {
-        font-family: 'Vera';
-        font-style: normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
-      }
-    
+    return `   
       @font-face {
         font-family: 'Heebo';
         font-style: normal;
         font-weight: bold;
-        src: url(data:font/ttf;charset=utf-8;base64,${bold})  format("ttf");
+        src: url(data:font/ttf;charset=utf-8;base64,${heebo})  format("ttf");
       }
 
     body {
-        background: ${background};
+        background: white;
         background-image: url('https://images.workchain.co.uk/og-image/background.jpg');
         background-size: cover;
         height: 100vh;
@@ -142,7 +117,6 @@ export function getHtml(parsedReq: ParsedRequest) {
                 />
             </div>
 
-
             <div class="url">
                 workchain.co.uk/jobs
             </div>
@@ -150,17 +124,3 @@ export function getHtml(parsedReq: ParsedRequest) {
     </body>
 </html>`;
 }
-
-// function getImage(src: string, width ='auto', height = '225') {
-//     return `<img
-//         class="logo"
-//         alt="Generated Image"
-//         src="${sanitizeHtml(src)}"
-//         width="${sanitizeHtml(width)}"
-//         height="${sanitizeHtml(height)}"
-//     />`
-// }
-
-// function getPlusSign(i: number) {
-//     return i === 0 ? '' : '<div class="plus">+</div>';
-// }
