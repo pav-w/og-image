@@ -1,17 +1,16 @@
-
-import { readFileSync } from 'fs';
 import { sanitizeHtml } from './sanitizer';
 import { ParsedRequest } from './types';
 
-const heebo = readFileSync(`${__dirname}/../_fonts/Heebo-Bold.ttf`).toString('base64');
+
 
 function getCss() {
     return `   
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600');
+
       @font-face {
         font-family: 'Heebo';
         font-style: normal;
-        font-weight: bold;
-        src: url(data:font/ttf;charset=utf-8;base64,${heebo})  format("ttf");
+        font-weight: 600;
       }
 
     body {
@@ -64,16 +63,20 @@ function getCss() {
 
     .url {
         font-size: 30px;
-        font-weight: bold;
+        font-weight: 600;
         color: white;
         font-family: 'Heebo', sans-serif;
+    }
+
+    .apply-now {
+        margin-top: 20px;
     }
     
     .jobTitle, .location {
         font-family: 'Heebo', sans-serif;
         font-style: normal;
         color: white;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 62px;
         line-height: 1.4;
     }`;

@@ -1,6 +1,6 @@
 import { ParsedRequest } from '../api/_lib/types';
 const { H, R, copee } = (window as any);
-let timeout = -1;
+// let timeout = -1;
 
 interface ImagePreviewProps {
     src: string;
@@ -11,10 +11,11 @@ interface ImagePreviewProps {
 }
 
 const ImagePreview = ({ src, onclick, onload, onerror, loading }: ImagePreviewProps) => {
-console.log("🚀 ~ file: index.ts ~ line 14 ~ ImagePreview ~ src", src)
+
     const style = {
         filter: loading ? 'blur(5px)' : '',
         opacity: loading ? 0.1 : 1,
+        display: 'none'
     };
     const title = 'Click to copy image URL to clipboard';
     return H('a',
@@ -25,10 +26,10 @@ console.log("🚀 ~ file: index.ts ~ line 14 ~ ImagePreview ~ src", src)
     );
 }
 
-interface DropdownOption {
-    text: string;
-    value: string;
-}
+// interface DropdownOption {
+//     text: string;
+//     value: string;
+// }
 
 // interface DropdownProps {
 //     options: DropdownOption[];
@@ -58,22 +59,22 @@ interface DropdownOption {
 //     );
 // }
 
-interface TextInputProps {
-    value: string;
-    oninput: (val: string) => void;
-}
+// interface TextInputProps {
+//     value: string;
+//     oninput: (val: string) => void;
+// }
 
-const TextInput = ({ value, oninput }: TextInputProps) => {
-    return H('div',
-        { className: 'input-outer-wrapper' },
-        H('div',
-            { className: 'input-inner-wrapper' },
-            H('input',
-                { type: 'text', value, oninput: (e: any) => oninput(e.target.value) }
-            )
-        )
-    );
-}
+// const TextInput = ({ value, oninput }: TextInputProps) => {
+//     return H('div',
+//         { className: 'input-outer-wrapper' },
+//         H('div',
+//             { className: 'input-inner-wrapper' },
+//             H('input',
+//                 { type: 'text', value, oninput: (e: any) => oninput(e.target.value) }
+//             )
+//         )
+//     );
+// }
 
 // interface ButtonProps {
 //     label: string;
@@ -84,20 +85,20 @@ const TextInput = ({ value, oninput }: TextInputProps) => {
 //     return H('button', { onclick }, label);
 // }
 
-interface FieldProps {
-    label: string;
-    input: any;
-}
+// interface FieldProps {
+//     label: string;
+//     input: any;
+// }
 
-const Field = ({ label, input }: FieldProps) => {
-    return H('div',
-        { className: 'field' },
-        H('label', 
-            H('div', {className: 'field-label'}, label),
-            H('div', { className: 'field-value' }, input),
-        ),
-    );
-}
+// const Field = ({ label, input }: FieldProps) => {
+//     return H('div',
+//         { className: 'field' },
+//         H('label', 
+//             H('div', {className: 'field-label'}, label),
+//             H('div', { className: 'field-value' }, input),
+//         ),
+//     );
+// }
 
 interface ToastProps {
     show: boolean;
@@ -142,9 +143,9 @@ const Toast = ({ show, message }: ToastProps) => {
 //     { text: 'Markdown', value: '1' },
 // ];
 
-const imageLightOptions: DropdownOption[] = [
-    { text: 'Vercel', value: 'https://www.workchain.co.uk/assets/img/workchain-logo-white.svg' },
-];
+// const imageLightOptions: DropdownOption[] = [
+//     { text: 'Vercel', value: 'https://www.workchain.co.uk/assets/img/workchain-logo-white.svg' },
+// ];
 
 // const imageDarkOptions: DropdownOption[] = [
 
@@ -188,52 +189,52 @@ interface AppState extends ParsedRequest {
 type SetState = (state: Partial<AppState>) => void;
 
 const App = (_: any, state: AppState, setState: SetState) => {
-    const setLoadingState = (newState: Partial<AppState>) => {
-        window.clearTimeout(timeout);
-        if (state.overrideUrl && state.overrideUrl !== newState.overrideUrl) {
-            newState.overrideUrl = state.overrideUrl;
-        }
-        if (newState.overrideUrl) {
-            timeout = window.setTimeout(() => setState({ overrideUrl: null }), 200);
-        }
+    // const setLoadingState = (newState: Partial<AppState>) => {
+    //     window.clearTimeout(timeout);
+    //     if (state.overrideUrl && state.overrideUrl !== newState.overrideUrl) {
+    //         newState.overrideUrl = state.overrideUrl;
+    //     }
+    //     if (newState.overrideUrl) {
+    //         timeout = window.setTimeout(() => setState({ overrideUrl: null }), 200);
+    //     }
 
-        setState({ ...newState, loading: true });
-    };
+    //     setState({ ...newState, loading: true });
+    // };
     const {
         fileType = 'png',
-        fontSize = '100px',
-        theme = 'light',
-        md = true,
-        text = '**Hello** World',
+        // fontSize = '100px',
+        // theme = 'light',
+        // md = true,
+        // text = '**Hello** World',
         title = 'HGV Class 1 Driver',
         location = 'Nottingham',
-        images=[imageLightOptions[0].value],
-        widths=[],
-        heights=[],
+        // images=[imageLightOptions[0].value],
+        // widths=[],
+        // heights=[],
         showToast = false,
         messageToast = '',
         loading = true,
         // selectedImageIndex = 0,
         overrideUrl = null,
     } = state;
-    const mdValue = md ? '1' : '0';
+    // const mdValue = md ? '1' : '0';
     // const imageOptions = theme === 'light' ? imageLightOptions : imageDarkOptions;
     const url = new URL(window.location.origin);
-    url.pathname = `${encodeURIComponent(text)}.${fileType}`;
-    url.searchParams.append('theme', theme);
-    url.searchParams.append('md', mdValue);
+    url.pathname = `og.${fileType}`;
+    // url.searchParams.append('theme', theme);
+    // url.searchParams.append('md', mdValue);
     url.searchParams.append('title', title);
     url.searchParams.append('location', location);
-    url.searchParams.append('fontSize', fontSize);
-    for (let image of images) {
-        url.searchParams.append('images', image);
-    }
-    for (let width of widths) {
-        url.searchParams.append('widths', width);
-    }
-    for (let height of heights) {
-        url.searchParams.append('heights', height);
-    }
+    // url.searchParams.append('fontSize', fontSize);
+    // for (let image of images) {
+    //     url.searchParams.append('images', image);
+    // }
+    // for (let width of widths) {
+    //     url.searchParams.append('widths', width);
+    // }
+    // for (let height of heights) {
+    //     url.searchParams.append('heights', height);
+    // }
 
     return H('div',
         { className: 'split' },
@@ -277,16 +278,16 @@ const App = (_: any, state: AppState, setState: SetState) => {
                 //         onchange: (val: string) => setLoadingState({ md: val === '1' })
                 //     })
                 // }),
-                H(Field, {
-                    label: 'Text Input',
-                    input: H(TextInput, {
-                        value: text,
-                        oninput: (val: string) => {
-                            console.log('oninput ' + val);
-                            setLoadingState({ text: val, overrideUrl: url });
-                        }
-                    })
-                }),
+                // H(Field, {
+                //     label: 'Text Input',
+                //     input: H(TextInput, {
+                //         value: text,
+                //         oninput: (val: string) => {
+                //             console.log('oninput ' + val);
+                //             setLoadingState({ text: val, overrideUrl: url });
+                //         }
+                //     })
+                // }),
                 // H(Field, {
                 //     label: 'Image 1',
                 //     input: H('div',
