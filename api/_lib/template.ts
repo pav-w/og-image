@@ -3,7 +3,14 @@ import { ParsedRequest } from './types';
 
 
 
-function getCss() {
+function getCss(title:string, location:string) {
+
+    let fontSize = 62;
+
+    if (title.length > 30 || location.length > 30) {
+        fontSize = 50;
+    }
+
     return `   
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600');
 
@@ -77,7 +84,7 @@ function getCss() {
         font-style: normal;
         color: white;
         font-weight: 600;
-        font-size: 62px;
+        font-size: ${fontSize}px;
         line-height: 1.4;
     }`;
 }
@@ -90,7 +97,7 @@ export function getHtml(parsedReq: ParsedRequest) {
     <title>Generated Image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        ${getCss()}
+        ${getCss(title, location)}
     </style>
     <body>
         <div class="main">
